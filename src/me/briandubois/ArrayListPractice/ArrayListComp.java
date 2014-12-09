@@ -1,4 +1,4 @@
-package me.briandubois;
+package me.briandubois.ArrayListPractice;
 import java.util.*;
 
 /**
