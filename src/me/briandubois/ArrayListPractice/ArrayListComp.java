@@ -18,7 +18,7 @@ public class ArrayListComp {
             }
         }*/
         a.retainAll(b);
-        b.retainAll(a);
+        //b.retainAll(a);
         return a;
     }
     
