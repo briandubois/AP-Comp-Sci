@@ -1,12 +1,14 @@
 package me.briandubois.ArrayListPractice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Brian on 12/8/2014.
  */
 public class ArrayReverse {
-    public static ArrayList<String> reverse(ArrayList<String> a)
+    public static List<String> reverse(List<String> a)
     {
         for (int i = 0; i < a.size() / 2; i++) {
 
