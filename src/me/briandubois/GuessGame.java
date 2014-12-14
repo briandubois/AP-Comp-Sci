@@ -52,8 +52,7 @@ public class GuessGame {
 
     public static void giveIntro() {
         System.out.println("This program allows you to play a guessing game.");
-        System.out.println("I will think of a number between 1 and "
-                + MAX_GUESS);
+        System.out.println("I will think of a number between 1 and " + MAX_GUESS);
         System.out.println("and will allow you to guess until you get it.");
         System.out.println("For each guess, I will tell you whether the");
         System.out.println("right answer is higher or lower than your guess.");
