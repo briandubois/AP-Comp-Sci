@@ -49,7 +49,6 @@ public class DrivingInfo {
         int distance;
 
         //cn1 set ups
-        for (int )
         if (c1.equals("A")){
             cn1 = fars[0];
         }
@@ -120,8 +119,9 @@ public class DrivingInfo {
         }
 
         double basicHours = getTotalDistance(c1,c2)/mpg;
-        int hours = basicHours / 60; //since both are ints, you get an int
-        int minutes = basicHours % 60;
+        double basicMinutes = basicHours * 60;
+        int hours = (int)(basicMinutes / 60);
+        int minutes = (int)(basicMinutes % 60);
         System.out.printf("%d:%02d", hours, minutes);
     }
 
