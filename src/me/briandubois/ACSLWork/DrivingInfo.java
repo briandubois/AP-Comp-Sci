@@ -1,5 +1,6 @@
 package me.briandubois.ACSLWork;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -7,27 +8,21 @@ import java.util.Scanner;
  */
 public class DrivingInfo {
 
-    private static String cityFirst;
-    private static String cityLast;
-    private static String vehicle;
-    private static String road;
-    private static double gcost;
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Navulator, the navigational calculator. /n Please enter your specific trip details: ");
         System.out.print("Please enter your starting city: ");
-        cityFirst = scanner.next();
+        String cityFirst = scanner.next();
         System.out.print("Please enter your destination city: ");
-        cityLast = scanner.next();
-        System.out.println("Please enter your type of vehicle: ");
-        vehicle = scanner.next();
+        String cityLast = scanner.next();
+        System.out.print("Please enter your type of vehicle: ");
+        String vehicle = scanner.next();
         System.out.print("Please enter the type of roadway you will be traveling on: ");
-        road = scanner.next();
+        String road = scanner.next();
         System.out.print("And lastly, Please enter the current cost of gasoline per gallon: ");
-        gcost = scanner.nextDouble();
+        double gcost = scanner.nextDouble();
         System.out.println();
-        System.out.println("Alright her are the specifics of yor trip: ");
+        System.out.println("Alright here are the specifics of yor trip: ");
         printSpecs(cityFirst, cityLast, vehicle, road, gcost);
     }
 
@@ -35,7 +30,9 @@ public class DrivingInfo {
     {
         System.out.println("Total Distance: " + getTotalDistance(c1,c2) + " miles.");
         System.out.println();
-        System.out.println("Total Time: " + getTime(c1,c2,r));
+        System.out.print("Total Time: ");
+        printTime(c1,c2,r);
+        System.out.println();
         System.out.println();
         System.out.println("Total Cost: " + getCost(c1,c2,v,gc));
         System.out.println();
@@ -44,8 +41,8 @@ public class DrivingInfo {
     public static int getTotalDistance(String c1, String c2)
     {
         int[] fars = {0,450,590,710,1030,1280,1360};
-        int cn1;
-        int cn2;
+        int cn1 = 0;
+        int cn2 = 0;
         int distance;
 
         //cn1 set ups
@@ -94,31 +91,30 @@ public class DrivingInfo {
             cn2 = fars[6];
         }
 
-        //Calculatios
+        //Calculations
         distance = cn2 - cn1;
         return distance;
     }
 
-    public static String getTime(String c1, String c2, String r)
+    public static void printTime(String c1, String c2, String r)
     {
-        int[] cars = {28,25,22,20};
+        double rideHours = 0;
+        int[] roads = {65,60,55,45};
 
-        int mpg;
-
-        if (r.equals("C")){
-            mpg = cars[0];
+        if (r.equals("I")){
+            rideHours = roads[0];
+        }
+        else if (r.equals("H")){
+            rideHours = roads[1];
         }
         else if (r.equals("M")){
-            mpg = cars[1];
+            rideHours = roads[2];
         }
-        else if (r.equals("F")){
-            mpg = cars[2];
-        }
-        else if (r.equals("V")){
-            mpg = cars[3];
+        else if (r.equals("S")){
+            rideHours = roads[3];
         }
 
-        double basicHours = getTotalDistance(c1,c2)/mpg;
+        double basicHours = getTotalDistance(c1,c2)/rideHours;
         double basicMinutes = basicHours * 60;
         int hours = (int)(basicMinutes / 60);
         int minutes = (int)(basicMinutes % 60);
@@ -127,6 +123,28 @@ public class DrivingInfo {
 
     public static String getCost(String c1, String c2, String v, double gc)
     {
+        int distance = getTotalDistance(c1,c2);
 
+        int[] cars = {28,25,22,20};
+        double mpg = 0;
+
+        if (v.equals("C")){
+            mpg = cars[0];
+        }
+        else if (v.equals("M")){
+            mpg = cars[1];
+        }
+        else if (v.equals("F")){
+            mpg = cars[2];
+        }
+        else if (v.equals("V")){
+            mpg = cars[3];
+        }
+
+        String tripCostPrint;
+        double tripCost = ((distance / mpg) * gc);
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        tripCostPrint = numberFormat.format(tripCost);
+        return "$" + tripCostPrint;
     }
 }
