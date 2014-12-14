@@ -33,7 +33,7 @@ public class DrivingInfo {
 
     public static void printSpecs(String c1, String c2, String v, String r, double gc)
     {
-        System.out.println("Total Distance: " + getTotalDistance(c1,c2));
+        System.out.println("Total Distance: " + getTotalDistance(c1,c2) + " miles.");
         System.out.println();
         System.out.println("Total Time: " + getTime(c1,c2,r));
         System.out.println();
@@ -51,48 +51,48 @@ public class DrivingInfo {
         //cn1 set ups
         for (int )
         if (c1.equals("A")){
-            cn1 = fars[1];
+            cn1 = fars[0];
         }
         else if (c1.equals("B")){
-            cn1 = fars[2];
+            cn1 = fars[1];
         }
         else if (c1.equals("C")){
-            cn1 = fars[3];
+            cn1 = fars[2];
         }
         else if (c1.equals("D")){
-            cn1 = fars[4];
+            cn1 = fars[3];
         }
         else if (c1.equals("E")){
-            cn1 = fars[5];
+            cn1 = fars[4];
         }
         else if (c1.equals("F")){
-            cn1 = fars[6];
+            cn1 = fars[5];
         }
         else if (c1.equals("G")){
-            cn1 = fars[7];
+            cn1 = fars[6];
         }
 
         //cn2 set ups
         if (c2.equals("A")){
-            cn2 = fars[1];
+            cn2 = fars[0];
         }
         else if (c2.equals("B")){
-            cn2 = fars[2];
+            cn2 = fars[1];
         }
         else if (c2.equals("C")){
-            cn2 = fars[3];
+            cn2 = fars[2];
         }
         else if (c2.equals("D")){
-            cn2 = fars[4];
+            cn2 = fars[3];
         }
         else if (c2.equals("E")){
-            cn2 = fars[5];
+            cn2 = fars[4];
         }
         else if (c2.equals("F")){
-            cn2 = fars[6];
+            cn2 = fars[5];
         }
         else if (c2.equals("G")){
-            cn2 = fars[7];
+            cn2 = fars[6];
         }
 
         //Calculatios
@@ -102,7 +102,27 @@ public class DrivingInfo {
 
     public static String getTime(String c1, String c2, String r)
     {
+        int[] cars = {28,25,22,20};
 
+        int mpg;
+
+        if (r.equals("C")){
+            mpg = cars[0];
+        }
+        else if (r.equals("M")){
+            mpg = cars[1];
+        }
+        else if (r.equals("F")){
+            mpg = cars[2];
+        }
+        else if (r.equals("V")){
+            mpg = cars[3];
+        }
+
+        double basicHours = getTotalDistance(c1,c2)/mpg;
+        int hours = basicHours / 60; //since both are ints, you get an int
+        int minutes = basicHours % 60;
+        System.out.printf("%d:%02d", hours, minutes);
     }
 
     public static String getCost(String c1, String c2, String v, double gc)
