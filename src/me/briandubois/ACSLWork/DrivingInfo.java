@@ -117,7 +117,7 @@ public class DrivingInfo {
         double basicHours = getTotalDistance(c1,c2)/rideHours;
         double basicMinutes = basicHours * 60;
         int hours = (int)(basicMinutes / 60);
-        int minutes = (int)(basicMinutes % 60);
+        int minutes = (int) Math.round(basicMinutes % 60);
         System.out.printf("%d:%02d", hours, minutes);
     }
 
