@@ -1,11 +1,9 @@
 package me.briandubois;
 
-import java.util.Scanner;
-
 public class Primes {
     public static void printPrimes(int max) {
         if (max >= 2) {
-            System.out.print("The me.briandubois.Primes are: 2");
+            System.out.print("The Primes are: 2");
             for (int i = 3; i <= max; i++) {
                 if (isPrime(i)) {
                     System.out.print(", " + i);
