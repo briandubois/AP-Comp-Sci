@@ -5,7 +5,7 @@ package me.briandubois.EulerProblems;
  */
 public class Problem3 {
     public static void main(String[] args) {
-       int numbah = 600851475143;
+        //int numbah = 600851475143;
     }
 
     /*
