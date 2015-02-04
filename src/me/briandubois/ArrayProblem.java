@@ -130,7 +130,7 @@ public class ArrayProblem {
     public static boolean isMagic(int[][] a) {
         boolean whydoesthisbooleanhavetoexist = false;
         if (isRowMagic(a) && isColMagic(a))
-            return true;
+            whydoesthisbooleanhavetoexist = true;
         return whydoesthisbooleanhavetoexist;
         //like seriously I can just return true or false in my if statement... like c'mon i thought the whole point of this was to try to create efficient code!!
     }

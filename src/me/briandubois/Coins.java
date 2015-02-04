@@ -8,21 +8,27 @@ import java.util.*;
 public class Coins {
     public static void threeHeads() {
         Random rand = new Random();
-        int hs = 0;
-        int flips = 0;
-        while (hs <= 2) {
+        long hs = 0;
+        long flips = 0;
+        while (hs <= 29) {
             int side = rand.nextInt(2);
             if (side == 0) {
                 hs++;
-                System.out.print("H ");
+                //System.out.print("H ");
             } else {
                 hs = 0;
-                System.out.print("T ");
+               // System.out.print("T ");
             }
             flips++;
         }
         System.out.println();
         System.out.println("Three heads in a row!!!");
         System.out.println("It took " + flips + " flips.");
+    }
+
+    public static void main(String[] args) {
+
+        threeHeads();
+
     }
 }
