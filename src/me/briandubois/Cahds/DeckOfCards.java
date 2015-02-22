@@ -63,15 +63,15 @@ public class DeckOfCards
     }
 
     public void dealDeck(){
-        for (int i = 0; i < NUMBER_OF_CARDS; i++){
-            if (currentCard<deck.length){
-                if (i%4 > 0)
-                    System.out.print(deck[i] + " ");
-                else{
-                    System.out.println();
-                    System.out.print(deck[i] + " ");
+        System.out.print(deck[0]);
+        for (int i = 1; i < NUMBER_OF_CARDS; i++){
+            if (i%4 > 0)
+                System.out.print(", " + deck[i]);
+            else{
+                System.out.println();
+                System.out.print(deck[i]);
                 }
-            }
+
         }
 
     }
