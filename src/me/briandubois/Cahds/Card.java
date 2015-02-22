@@ -9,13 +9,14 @@ public class Card {
 
     public Card(String cardFace, String cardSuit)
     {
-
+        face = cardFace;
+        suit = cardSuit;
     }
 
     //returns format is, for example, "King of Hearts".
     @Override
     public String toString()
     {
-
+        return face + " of " + suit;
     }
 }

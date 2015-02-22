@@ -11,8 +11,11 @@ public class DeckTest {
      * print cards, four per line
      * Hint: use modulo 4 and one for loop
      */
-
-
-
+        DeckOfCards casino = new DeckOfCards();
+        casino.dealDeck();
+        System.out.println();
+        System.out.println();
+        casino.shuffle();
+        casino.dealDeck();
     }
 }
