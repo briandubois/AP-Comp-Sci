@@ -12,7 +12,7 @@ public class GettingMode {
         int mode = 0;
         int modeCount = 0;
 
-        for (int i = 0; i <= 100; i++)
+        for (int i = 1; i <= 100; i++)
         {
             int currentCount = 0;
 
@@ -44,15 +44,16 @@ public class GettingMode {
     }
 
     public static void main(String[] args) {
-        int[] usedissun = new int[100];
+        int[] usedissun = new int[6];
         Random r = new Random();
 
         for (int i = 0; i < usedissun.length; i++)
         {
-            usedissun[i] = r.nextInt(101);
+            usedissun[i] = i;
         }
+        usedissun[5] = 4;
 
-        mode1(usedissun);
-        mode2(usedissun);
+        System.out.println(mode1(usedissun));
+        System.out.println(mode2(usedissun));
     }
 }
