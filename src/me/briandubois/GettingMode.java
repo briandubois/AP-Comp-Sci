@@ -41,7 +41,6 @@ public class GettingMode {
                 HIndex = a[i];
         }
         return HIndex;
-
     }
 
     public static void main(String[] args) {
