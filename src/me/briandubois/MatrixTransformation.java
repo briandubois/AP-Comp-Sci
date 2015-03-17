@@ -1,11 +1,9 @@
 package me.briandubois;
-import java.util.*;
 
 /**
  * Created by Brian on 3/15/2015.
  */
 public class MatrixTransformation {
-
 
     public static void main(String[] args) {
 
@@ -15,21 +13,22 @@ public class MatrixTransformation {
         mirrorVerticalLeftToRight(matrix);
         printArray(matrix);
 
-
+	    matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         System.out.println("Vertical Right To Left:");
         mirrorVerticalRightToLeft(matrix);
         printArray(matrix);
 
-
+	    matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         System.out.println("Horizontal Top To Bottom:");
         mirrorHorizontalTopToBottom(matrix);
         printArray(matrix);
 
-
+	    matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         System.out.println("Horizontal Bottom To Top");
         mirrorHorizontalBottomToTop(matrix);
         printArray(matrix);
 
+	    matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         System.out.println("Diagonal Right To Left");
         mirrorDiagonalRightToLeft(matrix);
         printArray(matrix);
