@@ -47,11 +47,19 @@ public class MatrixTransformation {
 
 
     public static void mirrorVerticalLeftToRight(int[][] a) {
-
+	    int height = a.length;
+	    int numCols = a[0].length;
+	    for (int row = 0; row <height; row++)
+		    for (int col = 0; col < numCols/2; col++)
+			    a[row][numCols-1-col] = a[row][col];
     }
 
     public static void mirrorVerticalRightToLeft(int[][] a) {
-
+	    int height = a.length;
+	    int numCols = a[0].length;
+	    for (int row = 0; row <height; row++)
+		    for (int col = 0; col < numCols/2; col++)
+			    a[row][numCols-1-col] = a[row][col];
     }
 
     public static void mirrorHorizontalTopToBottom(int[][] a) {
@@ -63,11 +71,19 @@ public class MatrixTransformation {
     }
 
     public static void mirrorHorizontalBottomToTop(int[][] a) {
-
+	    int height = a.length;
+	    int numCols = a[0].length;
+	    for (int col = 0; col < numCols; col++)
+		    for (int row = 0; row <height/2; row++)
+			    a[row][col] = a[height-row-1][col];
     }
 
     public static void mirrorDiagonalRightToLeft(int[][] a) {
-
+	    int height = a.length;
+	    int numCols = a[0].length;
+	    for (int row = 0; row <height; row++)
+		    for (int col = row + 1; col < numCols; col++)
+			    a[col][row] = a[row][col];
     }
 }
-}
+
