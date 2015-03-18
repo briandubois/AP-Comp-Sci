@@ -5,9 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by Brian DuBois on 2/27/2015.
- */
+
 public class TestingFrame {
 
     static JLabel customLabel;
@@ -15,33 +13,40 @@ public class TestingFrame {
 
     public static void main(String[] args) {
 
-        SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(new Runnable() {
+	        @Override
+	        public void run() {
 
 
-            JFrame mainFrame = new JFrame("Hello Brian");
-            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            TestingPanel panel = new TestingPanel();
-            panel.setLayout(new FlowLayout());
-            customLabel = new JLabel("No Clicks yet...");
-            JButton button = new JButton("This is a button, couldn't you tell?");
+		        JFrame mainFrame = new JFrame("Hello Brian");
+		        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        TestingPanel panel = new TestingPanel();
+		        panel.setLayout(new FlowLayout());
+		        customLabel = new JLabel("No Clicks yet...");
+		        final JButton button = new JButton("This is a button, couldn't you tell?");
 
-            button.addActionListener(e -> {
-                clicks++;
-                customLabel.setText("Woohoo! " + clicks + " clicks have been done!");
-                button.setSize(new Dimension(button.getWidth() + 10, button.getHeight() + 16));
-            });
+		        button.addActionListener(new ActionListener() {
+			        @Override
+			        public void actionPerformed(ActionEvent e) {
+				        clicks++;
+				        customLabel.setText("Woohoo! " + (clicks*1000+111) + " clicks have been done!");
+				        button.setSize(new Dimension(button.getWidth() + 10, button.getHeight() + 16));
+			        }
+		        });
 
-            panel.add(customLabel);
-            panel.add(button);
+		        panel.add(customLabel);
+		        panel.add(button);
 
-            mainFrame.add(panel);
+		        mainFrame.add(panel);
 
-            mainFrame.pack();
-            mainFrame.setVisible(true);
+		        mainFrame.pack();
+		        mainFrame.setVisible(true);
 
 
+	        }
         });
 
     }
 
 }
+

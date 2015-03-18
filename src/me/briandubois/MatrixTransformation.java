@@ -7,28 +7,29 @@ public class MatrixTransformation {
 
     public static void main(String[] args) {
 
-        int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[][] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+	    printArray(matrix);
 
         System.out.println("Vertical Left to Right:");
         mirrorVerticalLeftToRight(matrix);
         printArray(matrix);
 
-	    matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+	    matrix = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
         System.out.println("Vertical Right To Left:");
         mirrorVerticalRightToLeft(matrix);
         printArray(matrix);
 
-	    matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+	    matrix = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
         System.out.println("Horizontal Top To Bottom:");
         mirrorHorizontalTopToBottom(matrix);
         printArray(matrix);
 
-	    matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+	    matrix = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
         System.out.println("Horizontal Bottom To Top");
         mirrorHorizontalBottomToTop(matrix);
         printArray(matrix);
 
-	    matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+	    matrix = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}, {17, 18, 19, 20}};
         System.out.println("Diagonal Right To Left");
         mirrorDiagonalRightToLeft(matrix);
         printArray(matrix);
@@ -58,7 +59,7 @@ public class MatrixTransformation {
 	    int numCols = a[0].length;
 	    for (int row = 0; row <height; row++)
 		    for (int col = 0; col < numCols/2; col++)
-			    a[row][numCols-1-col] = a[row][col];
+			    a[row][col] = a[row][numCols-1-col];
     }
 
     public static void mirrorHorizontalTopToBottom(int[][] a) {
