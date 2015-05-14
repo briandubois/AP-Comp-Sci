@@ -13,7 +13,7 @@ public class Forest implements Runnable{
 
     public Forest() {
 
-        mainFrame= new JFrame("Gump");
+        mainFrame= new JFrame("Play It Up!");
         mainFrame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
 
         panel = new CPongGame();

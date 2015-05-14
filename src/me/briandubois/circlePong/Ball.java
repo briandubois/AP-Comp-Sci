@@ -9,7 +9,7 @@ public class Ball {
 
     public int y,x,radius;
 
-    public int xMove = 2, Ymove = 2;
+    public int xMove = 2, yMove = 2;
 
     public Ball(int x, int y, int rad){
 
@@ -18,12 +18,30 @@ public class Ball {
         radius = rad;
     }
 
+    public Ball(int x, int y, int rad, int move){
+
+        this.x = x;
+        this.y = y;
+        radius = rad;
+        xMove = move;
+        yMove = move;
+    }
+
+    public Ball(int x, int y, int rad, int xm, int ym){
+
+        this.x = x;
+        this.y = y;
+        radius = rad;
+        xMove = xm;
+        yMove = ym;
+    }
+
     public int getLeftSide(){
-        return x + radius;
+        return x - radius;
     }
 
     public int getRgihtSide() {
-        return x - radius;
+        return x + radius;
     }
 
     public int getTop(){
@@ -37,5 +55,14 @@ public class Ball {
 
         graps.fillOval(x - radius,y - radius,radius*2,radius*2);
 
+    }
+
+    public void move(){
+        if (getTop()+ yMove < 0 || getBottom()+ yMove > CPongGame.HEIGHT)
+            yMove *= -1;
+        if (getLeftSide() + xMove < 0 || getRgihtSide() + xMove > CPongGame.WIDTH)
+            xMove *= -1;
+        x += xMove;
+        y += yMove;
     }
 }
