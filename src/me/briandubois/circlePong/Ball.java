@@ -1,6 +1,7 @@
 package me.briandubois.circlePong;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by 328838 on 5/13/2015.
@@ -8,6 +9,12 @@ import java.awt.*;
 public class Ball {
 
     public int y,x,radius;
+
+    Random rand = new Random();
+
+    public Color color = Color.GREEN;
+
+    public int num = (int) (Math.random() * 5);
 
     public int xMove = 2, yMove = 2;
 
@@ -58,10 +65,14 @@ public class Ball {
     }
 
     public void move(){
-        if (getTop()+ yMove < 0 || getBottom()+ yMove > CPongGame.HEIGHT)
+        if (getTop()+ yMove < 0 || getBottom()+ yMove > CPongGame.HEIGHT) {
             yMove *= -1;
-        if (getLeftSide() + xMove < 0 || getRgihtSide() + xMove > CPongGame.WIDTH)
+            color = new Color(rand.nextInt(255)+ 1,rand.nextInt(255)+ 1,rand.nextInt(255)+ 1);
+        }
+        if (getLeftSide() + xMove < 0 || getRgihtSide() + xMove > CPongGame.WIDTH) {
             xMove *= -1;
+            color = new Color(rand.nextInt(255)+ 1,rand.nextInt(255)+ 1,rand.nextInt(255)+ 1);
+        }
         x += xMove;
         y += yMove;
     }
