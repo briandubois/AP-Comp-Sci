@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class CPongGame extends JPanel {
 
-    public static final int WIDTH = 750;
-    public static final int HEIGHT = 650;
+    public static final int WIDTH = 1905; //750 Lab
+    public static final int HEIGHT = 1000; //650 Lab
     public static final int SLEEP = 5; //slowness
 
     Random rand = new Random();
 
-    List<Ball> balls = new ArrayList<Ball>();
+    List<Ball> balls = new ArrayList<>();
 
     Ball b = new Ball(WIDTH/2- 200, HEIGHT /2, 50);
     Ball c = new Ball(WIDTH/2- 200, HEIGHT /2, 37, 9);
@@ -25,9 +25,9 @@ public class CPongGame extends JPanel {
     public CPongGame(){
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setBackground(Color.MAGENTA);
-        for (int i = 0; i < 1000; i++){ //set number of balls here
-            balls.add(new Ball(rand.nextInt(300)+200, rand.nextInt(300)+200, rand.nextInt(40)+11, rand.nextInt(3) + 2, rand.nextInt(3) + 2));
+        setBackground(Color.BLACK); //Background Color
+        for (int i = 0; i < 665; i++){ //set number of balls here
+            balls.add(new Ball(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(40)+11, rand.nextInt(10) - 5, rand.nextInt(10) - 5)); //Speed form -5 to 5
         }
 
     }
@@ -37,8 +37,10 @@ public class CPongGame extends JPanel {
 
         super.paintComponent(g);
 
+        g.setColor(b.color);
         b.drawShape(g);
         b.move();
+        g.setColor(c.color);
         c.drawShape(g);
         c.move();
         for(Ball ball: balls){

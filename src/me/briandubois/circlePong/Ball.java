@@ -14,7 +14,7 @@ public class Ball {
 
     public Color color = Color.GREEN;
 
-    public int num = (int) (Math.random() * 5);
+    //public int num = (int) (Math.random() * 5);
 
     public int xMove = 2, yMove = 2;
 
@@ -58,6 +58,7 @@ public class Ball {
     public int getBottom(){
         return y + radius;
     }
+
     public void drawShape(Graphics graps){
 
         graps.fillOval(x - radius,y - radius,radius*2,radius*2);
