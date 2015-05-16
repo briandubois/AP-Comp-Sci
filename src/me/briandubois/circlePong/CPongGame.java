@@ -25,7 +25,7 @@ public class CPongGame extends JPanel {
     public CPongGame(){
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setBackground(Color.BLACK); //Background Color
+        setBackground(Color.LIGHT_GRAY); //Background Color
         for (int i = 0; i < 665; i++){ //set number of balls here
             balls.add(new Ball(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(40)+11, rand.nextInt(10) - 5, rand.nextInt(10) - 5)); //Speed form -5 to 5
         }
