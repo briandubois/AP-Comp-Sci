@@ -12,35 +12,43 @@ public class Ball {
 
     Random rand = new Random();
 
-    public Color color = Color.GREEN;
-
-    //public int num = (int) (Math.random() * 5);
-
     public int xMove = 2, yMove = 2;
 
-    public Ball(int x, int y, int rad){
+    public CHierarchy color;
+
+    public Ball(int x, int y, int rad, int level){
 
         this.x = x;
         this.y = y;
         radius = rad;
+        color = CHierarchy.getHierarchy(level);
     }
 
-    public Ball(int x, int y, int rad, int move){
+    public Ball(int x, int y, int rad, int move, int level){
 
         this.x = x;
         this.y = y;
         radius = rad;
         xMove = move;
         yMove = move;
+        color = CHierarchy.getHierarchy(level);
+
     }
 
-    public Ball(int x, int y, int rad, int xm, int ym){
+    public Ball(int x, int y, int rad, int xm, int ym, int level){
 
         this.x = x;
         this.y = y;
         radius = rad;
         xMove = xm;
         yMove = ym;
+        color = CHierarchy.getHierarchy(level);
+    }
+
+    public boolean isInside(int x, int y){
+
+        return this.getLeftSide() < x && this.getRgihtSide() > x && this.getTop() < y && this.getBottom() > y;
+
     }
 
     public int getLeftSide(){
@@ -68,11 +76,11 @@ public class Ball {
     public void move(){
         if (getTop()+ yMove < 0 || getBottom()+ yMove > CPongGame.HEIGHT) {
             yMove *= -1;
-            color = new Color(rand.nextInt(255)+ 1,rand.nextInt(255)+ 1,rand.nextInt(255)+ 1);
+
         }
         if (getLeftSide() + xMove < 0 || getRgihtSide() + xMove > CPongGame.WIDTH) {
             xMove *= -1;
-            color = new Color(rand.nextInt(255)+ 1,rand.nextInt(255)+ 1,rand.nextInt(255)+ 1);
+
         }
         x += xMove;
         y += yMove;
