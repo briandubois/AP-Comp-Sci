@@ -45,9 +45,11 @@ public class Ball {
         color = CHierarchy.getHierarchy(level);
     }
 
-    public boolean isInside(int x, int y){
+    public boolean isInside(int x2, int y2){
 
-        return this.getLeftSide() < x && this.getRgihtSide() > x && this.getTop() < y && this.getBottom() > y;
+        double dist = Math.sqrt(Math.pow(this.x - x2, 2) +  Math.pow(this.y - y2, 2));
+
+        return dist <= radius;
 
     }
 

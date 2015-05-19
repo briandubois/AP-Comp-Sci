@@ -14,13 +14,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class CPongGame extends JPanel implements MouseListener {
 
-    public static final int WIDTH = 1350; //1350 Lab , 1905 Home
-    public static final int HEIGHT = 691; //691 Lab , 1000 Home
-    public static final int SLEEP = 5; //slowness
+    public static final int WIDTH = 600; //1350 Lab , 1905 Home
+    public static final int HEIGHT = 600; //691 Lab , 1000 Home
+    public static final int SLEEP = 10; //slowness
+
+    //variables
+    int level = 1; //1-5
+    int Regnumber = 0;
+    int Tripnumber = 100;
 
     Random rand = new Random();
 
     CopyOnWriteArrayList<Ball> balls = new CopyOnWriteArrayList<>();
+    CopyOnWriteArrayList<ChangeBall> tBalls = new CopyOnWriteArrayList<>();
 
     //Ball b = new Ball(WIDTH/2- 200, HEIGHT /2, 50);
    // Ball c = new Ball(WIDTH/2- 200, HEIGHT /2, 37, 9);
@@ -29,11 +35,14 @@ public class CPongGame extends JPanel implements MouseListener {
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.LIGHT_GRAY); //Background Color
-        for (int i = 0; i < 665; i++){ //set number of balls here
-           // balls.add(new Ball(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(40)+11, rand.nextInt(10) - 5, rand.nextInt(10) - 5)); //Speed form -5 to 5
+        for (int i = 0; i < Regnumber; i++){ //set number of balls here
+           balls.add(new Ball(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(30)+21, rand.nextInt(10) - 5, rand.nextInt(10) - 5,level-1)); //Speed form -5 to 5
         }
 
-        balls.add(new Ball(WIDTH / 2, HEIGHT / 2, 100, 4));
+        for (int i = 0; i < Tripnumber; i++){ //set number of balls here
+            tBalls.add(new ChangeBall(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(30)+21, rand.nextInt(10) - 5, rand.nextInt(10) - 5,rand.nextInt(4))); //Speed form -5 to 5
+        }
+
 
         this.addMouseListener(this);
         this.requestFocus();
@@ -45,31 +54,20 @@ public class CPongGame extends JPanel implements MouseListener {
 
         super.paintComponent(g);
 
-       /* g.setColor(b.color);
-        b.drawShape(g);
-        b.move();
-        g.setColor(c.color);
-        c.drawShape(g);
-        c.move();*/
         for(Ball ball: balls){
-            /*if(ball.num == 20)
-                ball.num = 0;
-            else
-                ball.num ++;
-            if(ball.num == 3)
-                color = new Color(rand.nextInt(255)+ 1,rand.nextInt(255)+ 1,rand.nextInt(255)+ 1);
-            */
+
             g.setColor(ball.color.color);
             ball.drawShape(g);
             ball.move();
         }
 
-        try {
-            Thread.sleep(SLEEP);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for(ChangeBall bill: tBalls){
+
+            g.setColor(bill.color.color);
+            bill.drawShape(g);
+            bill.move();
         }
-        repaint();
+
 
     }
 
@@ -96,6 +94,27 @@ public class CPongGame extends JPanel implements MouseListener {
                 } else {
 
                     this.balls.remove(ball);
+
+                }
+
+            }
+        }
+
+        for(ChangeBall bill : tBalls) {
+
+            if (bill.isInside(e.getX(), e.getY())) {
+
+                CHierarchy newColor = bill.color.getColorLower(bill.color);
+
+                bill.level--;
+
+                if (newColor != null) {
+
+                    bill.color = newColor;
+
+                } else {
+
+                    this.tBalls.remove(bill);
 
                 }
 
