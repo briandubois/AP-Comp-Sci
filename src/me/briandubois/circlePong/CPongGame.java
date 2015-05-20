@@ -4,8 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
@@ -14,14 +15,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class CPongGame extends JPanel implements MouseListener {
 
-    public static final int WIDTH = 600; //1350 Lab , 1905 Home
-    public static final int HEIGHT = 600; //691 Lab , 1000 Home
+    public static final int WIDTH = 1350; //1350 Lab , 1905 Home
+    public static final int HEIGHT = 691; //691 Lab , 1000 Home
     public static final int SLEEP = 10; //slowness
+    public static final DateFormat format = new SimpleDateFormat("mm:ss:SS");
+    Date startTime = new Date(System.currentTimeMillis());
+    Date endTime;
+
 
     //variables
-    int level = 1; //1-5
-    int Regnumber = 0;
-    int Tripnumber = 100;
+    int level = 5; //1-5
+    int Regnumber = 10;
+    int Tripnumber = 10;
 
     Random rand = new Random();
 
@@ -35,12 +40,16 @@ public class CPongGame extends JPanel implements MouseListener {
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.LIGHT_GRAY); //Background Color
+
+        //TODO record Time
+
+
         for (int i = 0; i < Regnumber; i++){ //set number of balls here
-           balls.add(new Ball(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(30)+21, rand.nextInt(10) - 5, rand.nextInt(10) - 5,level-1)); //Speed form -5 to 5
+           balls.add(new Ball(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(30)+41, rand.nextInt(10) - 5, rand.nextInt(10) - 5,level-1)); //Speed form -5 to 5
         }
 
         for (int i = 0; i < Tripnumber; i++){ //set number of balls here
-            tBalls.add(new ChangeBall(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(30)+21, rand.nextInt(10) - 5, rand.nextInt(10) - 5,rand.nextInt(4))); //Speed form -5 to 5
+            tBalls.add(new ChangeBall(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(30)+41, rand.nextInt(10) - 5, rand.nextInt(10) - 5,rand.nextInt(4))); //Speed form -5 to 5
         }
 
 
@@ -68,6 +77,8 @@ public class CPongGame extends JPanel implements MouseListener {
             bill.move();
         }
 
+        g.setColor(Color.BLACK);
+        g.drawString(this.format.format(new Date()), 100, 100);
 
     }
 
@@ -119,6 +130,12 @@ public class CPongGame extends JPanel implements MouseListener {
                 }
 
             }
+        }
+
+        if(this.balls.isEmpty() && this.tBalls.isEmpty()){
+
+            endTime = new Date(System.currentTimeMillis());
+
         }
 
     }
