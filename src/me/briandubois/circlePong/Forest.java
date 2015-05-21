@@ -32,6 +32,15 @@ public class Forest implements Runnable{
                 panel.repaint();
             }
         }).start();
+
+        new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                panel.curTime = System.currentTimeMillis();
+
+            }
+        }).start();
     }
 
     @Override

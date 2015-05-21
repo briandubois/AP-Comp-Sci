@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -19,8 +20,8 @@ public class CPongGame extends JPanel implements MouseListener {
     public static final int HEIGHT = 691; //691 Lab , 1000 Home
     public static final int SLEEP = 10; //slowness
     public static final DateFormat format = new SimpleDateFormat("mm:ss:SS");
-    Date startTime = new Date(System.currentTimeMillis());
-    Date endTime;
+    public long startTime;
+    public long curTime;
 
 
     //variables
@@ -42,6 +43,7 @@ public class CPongGame extends JPanel implements MouseListener {
         setBackground(Color.LIGHT_GRAY); //Background Color
 
         //TODO record Time
+        this.startTime = System.currentTimeMillis();
 
 
         for (int i = 0; i < Regnumber; i++){ //set number of balls here
@@ -78,7 +80,7 @@ public class CPongGame extends JPanel implements MouseListener {
         }
 
         g.setColor(Color.BLACK);
-        g.drawString(this.format.format(new Date()), 100, 100);
+        g.drawString(this.getTime(), WIDTH/2, HEIGHT/2);
 
     }
 
@@ -134,7 +136,7 @@ public class CPongGame extends JPanel implements MouseListener {
 
         if(this.balls.isEmpty() && this.tBalls.isEmpty()){
 
-            endTime = new Date(System.currentTimeMillis());
+            //TODO end game
 
         }
 
@@ -152,6 +154,19 @@ public class CPongGame extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    public String getTime(){
+
+        long difTime = this.curTime - this.startTime;
+
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(difTime);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(difTime) - TimeUnit.MINUTES.toSeconds(minutes);
+        long milli = difTime - TimeUnit.SECONDS.toMillis(seconds);
+
+
+        return String.format("%d : %d s : %d ", minutes, seconds, milli);
 
     }
 }
