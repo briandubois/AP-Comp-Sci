@@ -2,10 +2,12 @@ package me.briandubois.circlePong;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
@@ -14,20 +16,21 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by 328838 on 5/13/2015.
  */
-public class CPongGame extends JPanel implements MouseListener {
+public class CPongGame extends JPanel implements MouseListener, KeyListener {
 
     public static final int WIDTH = 1350; //1350 Lab , 1905 Home
     public static final int HEIGHT = 691; //691 Lab , 1000 Home
     public static final int SLEEP = 10; //slowness
-    public static final DateFormat format = new SimpleDateFormat("mm:ss:SS");
+    //public static final DateFormat format = new SimpleDateFormat("mm:ss:SS");
+    public boolean start = false;
     public long startTime;
     public long curTime;
 
 
     //variables
     int level = 5; //1-5
-    int Regnumber = 10;
-    int Tripnumber = 10;
+    int Regnumber = 30;
+    int Tripnumber = 5;
 
     Random rand = new Random();
 
@@ -56,6 +59,7 @@ public class CPongGame extends JPanel implements MouseListener {
 
 
         this.addMouseListener(this);
+        this.addKeyListener(this);
         this.requestFocus();
 
     }
@@ -65,29 +69,31 @@ public class CPongGame extends JPanel implements MouseListener {
 
         super.paintComponent(g);
 
-        for(Ball ball: balls){
+        //while(start == false)
+            //g.drawString("Press \"Enter\" To Start", WIDTH/2, HEIGHT/2);
 
-            g.setColor(ball.color.color);
-            ball.drawShape(g);
-            ball.move();
-        }
+        //while(start == true) {
+            for (Ball ball : balls) {
 
-        for(ChangeBall bill: tBalls){
+                g.setColor(ball.color.color);
+                ball.drawShape(g);
+                ball.move();
+            }
 
-            g.setColor(bill.color.color);
-            bill.drawShape(g);
-            bill.move();
-        }
+            for (ChangeBall bill : tBalls) {
 
-        g.setColor(Color.BLACK);
-        g.drawString(this.getTime(), WIDTH/2, HEIGHT/2);
+                g.setColor(bill.color.color);
+                bill.drawShape(g);
+                bill.move();
+            }
 
+            g.setColor(Color.BLACK);
+            g.drawString(this.getTime(), WIDTH / 2, HEIGHT / 2);
+        //}
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
-
 
     }
 
@@ -134,12 +140,16 @@ public class CPongGame extends JPanel implements MouseListener {
             }
         }
 
-        if(this.balls.isEmpty() && this.tBalls.isEmpty()){
+        if(stillSome()){
 
             //TODO end game
 
         }
 
+    }
+
+    public boolean stillSome(){
+        return(this.balls.isEmpty() && this.tBalls.isEmpty());
     }
 
     @Override
@@ -167,6 +177,27 @@ public class CPongGame extends JPanel implements MouseListener {
 
 
         return String.format("%d : %d s : %d ", minutes, seconds, milli);
+
+    }
+
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (e.getKeyCode()==KeyEvent.VK_ENTER){
+            System.out.print("outta here");
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode()==KeyEvent.VK_ENTER){
+            System.out.print("outta here");
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }
