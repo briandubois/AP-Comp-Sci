@@ -2,8 +2,6 @@ package me.briandubois.circlePong;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 //import java.text.DateFormat;
@@ -16,29 +14,28 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by 328838 on 5/13/2015.
  */
-public class CPongGame extends JPanel implements MouseListener, KeyListener {
+public class CPongGame extends JPanel implements MouseListener {
 
     public static final int WIDTH = 1350; //1350 Lab , 1905 Home
     public static final int HEIGHT = 691; //691 Lab , 1000 Home
     public static final int SLEEP = 10; //slowness
-    //public static final DateFormat format = new SimpleDateFormat("mm:ss:SS");
     public boolean start = false;
+    public boolean ended = false;
     public long startTime;
     public long curTime;
+    public long endTime;
+
 
 
     //variables
-    int level = 5; //1-5
-    int Regnumber = 30;
-    int Tripnumber = 5;
+    int level = 1; //1-5
+    int Regnumber = 5;
+    int Tripnumber = 0;
 
     Random rand = new Random();
 
     CopyOnWriteArrayList<Ball> balls = new CopyOnWriteArrayList<>();
     CopyOnWriteArrayList<ChangeBall> tBalls = new CopyOnWriteArrayList<>();
-
-    //Ball b = new Ball(WIDTH/2- 200, HEIGHT /2, 50);
-   // Ball c = new Ball(WIDTH/2- 200, HEIGHT /2, 37, 9);
 
     public CPongGame(){
 
@@ -46,7 +43,6 @@ public class CPongGame extends JPanel implements MouseListener, KeyListener {
         setBackground(Color.LIGHT_GRAY); //Background Color
 
         //TODO record Time
-        this.startTime = System.currentTimeMillis();
 
 
         for (int i = 0; i < Regnumber; i++){ //set number of balls here
@@ -57,11 +53,7 @@ public class CPongGame extends JPanel implements MouseListener, KeyListener {
             tBalls.add(new ChangeBall(rand.nextInt(WIDTH-500)+200, rand.nextInt(HEIGHT-500)+200, rand.nextInt(30)+41, rand.nextInt(10) - 5, rand.nextInt(10) - 5,rand.nextInt(4))); //Speed form -5 to 5
         }
 
-
         this.addMouseListener(this);
-        this.addKeyListener(this);
-        this.requestFocus();
-
     }
 
     public void paintComponent(Graphics g){
@@ -69,10 +61,13 @@ public class CPongGame extends JPanel implements MouseListener, KeyListener {
 
         super.paintComponent(g);
 
-        //while(start == false)
-            //g.drawString("Press \"Enter\" To Start", WIDTH/2, HEIGHT/2);
+        System.out.println(this.isEmpty());
 
-        //while(start == true) {
+        if(!start) {
+            g.drawString("Press \"Enter\" To Start", WIDTH / 2 - 70, HEIGHT / 2);
+        }
+
+        if(start) {
             for (Ball ball : balls) {
 
                 g.setColor(ball.color.color);
@@ -88,8 +83,11 @@ public class CPongGame extends JPanel implements MouseListener, KeyListener {
             }
 
             g.setColor(Color.BLACK);
-            g.drawString(this.getTime(), WIDTH / 2, HEIGHT / 2);
-        //}
+            if(!ended)
+                g.drawString(this.getTime(), 1, 10);
+            else
+                g.drawString("You won! Your time is: " + getTimeString(endTime), WIDTH/2 - 70, HEIGHT/2);
+        }
     }
 
     @Override
@@ -140,15 +138,16 @@ public class CPongGame extends JPanel implements MouseListener, KeyListener {
             }
         }
 
-        if(stillSome()){
+        if(isEmpty() && !ended){
 
-            //TODO end game
+            endTime = curTime;
+            ended = true;
 
         }
 
     }
 
-    public boolean stillSome(){
+    public boolean isEmpty(){
         return(this.balls.isEmpty() && this.tBalls.isEmpty());
     }
 
@@ -180,24 +179,15 @@ public class CPongGame extends JPanel implements MouseListener, KeyListener {
 
     }
 
+    public String getTimeString(long time){
+
+        long difTime = time - this.startTime;
+
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(difTime);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(difTime) - TimeUnit.MINUTES.toSeconds(minutes);
+        long milli = difTime - TimeUnit.SECONDS.toMillis(seconds);
 
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        if (e.getKeyCode()==KeyEvent.VK_ENTER){
-            System.out.print("outta here");
-        }
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode()==KeyEvent.VK_ENTER){
-            System.out.print("outta here");
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
+        return String.format("%d : %d s : %d ", minutes, seconds, milli);
     }
 }
