@@ -1,11 +1,11 @@
+//whoops wrong name uhh to late. In Too Deep! FOR MOTHER MADAGASCAR!!!!!!!!!!!!
+
 package me.briandubois.circlePong;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-//import java.text.DateFormat;
-//import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
@@ -28,8 +28,8 @@ public class CPongGame extends JPanel implements MouseListener {
 
 
     //variables
-    int level = 1; //1-5
-    int Regnumber = 5;
+    int level = 5; //1-5
+    int Regnumber = 300;
     int Tripnumber = 0;
 
     Random rand = new Random();
@@ -188,6 +188,6 @@ public class CPongGame extends JPanel implements MouseListener {
         long milli = difTime - TimeUnit.SECONDS.toMillis(seconds);
 
 
-        return String.format("%d : %d s : %d ", minutes, seconds, milli);
+        return String.format("%d m : %d s : %d ms", minutes, seconds, milli);
     }
 }

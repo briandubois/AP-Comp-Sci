@@ -1,3 +1,5 @@
+//For a little more trip in your life
+
 package me.briandubois.circlePong;
 
 /**
