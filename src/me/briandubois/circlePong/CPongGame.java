@@ -16,9 +16,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class CPongGame extends JPanel implements MouseListener {
 
-    public static final int WIDTH = 1350; //1350 Lab , 1905 Home
-    public static final int HEIGHT = 691; //691 Lab , 1000 Home
+    public static final int WIDTH = 1270; //1350 Lab , 1905 Home, 1270 Room
+    public static final int HEIGHT = 950; //691 Lab , 1000 Home, 950 Room
     public static final int SLEEP = 10; //slowness
+    public static final Font bigFont = new Font("Arial", Font.TRUETYPE_FONT, 30);
     public boolean start = false;
     public boolean ended = false;
     public long startTime;
@@ -28,8 +29,8 @@ public class CPongGame extends JPanel implements MouseListener {
 
 
     //variables
-    int level = 5; //1-5
-    int Regnumber = 300;
+    int level = 1; //1-5
+    int Regnumber = 0;
     int Tripnumber = 0;
 
     Random rand = new Random();
@@ -61,10 +62,12 @@ public class CPongGame extends JPanel implements MouseListener {
 
         super.paintComponent(g);
 
+        g.setFont(bigFont);
+
         System.out.println(this.isEmpty());
 
         if(!start) {
-            g.drawString("Press \"Enter\" To Start", WIDTH / 2 - 70, HEIGHT / 2);
+            g.drawString("Press \"Enter\" To Start", WIDTH / 2 - 120, HEIGHT / 2);
         }
 
         if(start) {
@@ -83,10 +86,13 @@ public class CPongGame extends JPanel implements MouseListener {
             }
 
             g.setColor(Color.BLACK);
-            if(!ended)
-                g.drawString(this.getTime(), 1, 10);
+            if(!ended) {
+
+                g.drawString(this.getTime(), 1, 25);
+
+            }
             else
-                g.drawString("You won! Your time is: " + getTimeString(endTime), WIDTH/2 - 70, HEIGHT/2);
+                g.drawString("You won! Your time is: " + getTimeString(endTime), WIDTH/2 - 300, HEIGHT/2);
         }
     }
 

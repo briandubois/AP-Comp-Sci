@@ -44,12 +44,12 @@ public class GettingMode {
     }
 
     public static void main(String[] args) {
-        int[] usedissun = new int[6];
+        int[] usedissun = new int[10];
         Random r = new Random();
 
         for (int i = 0; i < usedissun.length; i++)
         {
-            usedissun[i] = i;
+            usedissun[i] = r.nextInt(100);
         }
         usedissun[5] = 4;
 
