@@ -30,13 +30,13 @@ public class CPongGame extends JPanel implements MouseListener {
 
     //variables
     int level = 1; //1-5
-    int Regnumber = 0;
-    int Tripnumber = 0;
+    int Regnumber = 10;
+    int Tripnumber = 10;
 
     Random rand = new Random();
 
-    CopyOnWriteArrayList<Ball> balls = new CopyOnWriteArrayList<>();
-    CopyOnWriteArrayList<ChangeBall> tBalls = new CopyOnWriteArrayList<>();
+    CopyOnWriteArrayList<Ball> balls = new CopyOnWriteArrayList<Ball>();
+    CopyOnWriteArrayList<ChangeBall> tBalls = new CopyOnWriteArrayList<ChangeBall>();
 
     public CPongGame(){
 
@@ -143,13 +143,13 @@ public class CPongGame extends JPanel implements MouseListener {
 
             }
         }
+        if( this.start )
+            if(isEmpty() && !ended){
 
-        if(isEmpty() && !ended){
+                endTime = curTime;
+                ended = true;
 
-            endTime = curTime;
-            ended = true;
-
-        }
+            }
 
     }
 
